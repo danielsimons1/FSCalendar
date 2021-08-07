@@ -294,7 +294,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         _contentView.frame = self.bounds;
         CGFloat headerHeight = self.preferredHeaderHeight;
         CGFloat weekdayHeight = self.preferredWeekdayHeight;
-        CGFloat rowHeight = self.preferredRowHeight;
+        CGFloat rowHeight = [self getPreferredRowHeight:_scope];
         CGFloat padding = 5;
         if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
             rowHeight = FSCalendarFloor(rowHeight*2)*0.5; // Round to nearest multiple of 0.5. e.g. (16.8->16.5),(16.2->16.0)
@@ -352,7 +352,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 {
     CGFloat headerHeight = self.preferredHeaderHeight;
     CGFloat weekdayHeight = self.preferredWeekdayHeight;
-    CGFloat rowHeight = self.preferredRowHeight;
+    CGFloat rowHeight = [self getPreferredRowHeight:scope];
     CGFloat paddings = self.collectionViewLayout.sectionInsets.top + self.collectionViewLayout.sectionInsets.bottom;
     
     if (!self.floatingMode) {
@@ -918,7 +918,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     return _weekdayHeight;
 }
 
-- (CGFloat)preferredRowHeight
+- (CGFloat)getPreferredRowHeight:(FSCalendarScope)newScope
 {
     if (_preferredRowHeight == FSCalendarAutomaticDimension) {
         CGFloat headerHeight = self.preferredHeaderHeight;
@@ -932,7 +932,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         }
     }
     
-    if (_scope == FSCalendarScopeWeek) {
+    if (newScope == FSCalendarScopeWeek) {
         return 2 * _preferredRowHeight;
     }
     
