@@ -294,7 +294,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         _contentView.frame = self.bounds;
         CGFloat headerHeight = self.preferredHeaderHeight;
         CGFloat weekdayHeight = self.preferredWeekdayHeight;
-        CGFloat rowHeight = [self getPreferredRowHeight:_scope];
+        CGFloat rowHeight = [self getPreferredRowHeight:_transitionCoordinator.representingScope];
         CGFloat padding = 5;
         if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
             rowHeight = FSCalendarFloor(rowHeight*2)*0.5; // Round to nearest multiple of 0.5. e.g. (16.8->16.5),(16.2->16.0)
