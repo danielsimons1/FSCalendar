@@ -39,6 +39,8 @@ typedef NS_ENUM(NSUInteger, FSCalendarTransitionState) {
 
 @property (assign, nonatomic) CGRect sourceBounds;
 @property (assign, nonatomic) CGRect targetBounds;
+@property (assign, nonatomic) CGFloat sourceRowHeight;
+@property (assign, nonatomic) CGFloat targetRowHeight;
 @property (strong, nonatomic) NSDate *sourcePage;
 @property (strong, nonatomic) NSDate *targetPage;
 @property (assign, nonatomic) NSInteger focusedRow;

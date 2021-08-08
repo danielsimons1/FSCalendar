@@ -510,6 +510,11 @@ IB_DESIGNABLE
  */
 - (void)handleScopeGesture:(UIPanGestureRecognizer *)sender;
 
+/**
+ Returns the row height for a given scope
+ */
+- (CGFloat)getPreferredRowHeight:(FSCalendarScope *)scope;
+
 @end
 
 

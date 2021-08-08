@@ -247,6 +247,11 @@
     attributes.sourceBounds = self.calendar.bounds;
     attributes.sourcePage = self.calendar.currentPage;
     attributes.targetScope = targetScope;
+    
+    FSCalendarScope *sourceScope = targetScope == FSCalendarScopeWeek ? FSCalendarScopeMonth : FSCalendarScopeWeek;
+    attributes.sourceRowHeight = [self.calendar getPreferredRowHeight:sourceScope];
+    attributes.targetRowHeight = [self.calendar getPreferredRowHeight:targetScope];
+    
     attributes.focusedDate = ({
         NSArray<NSDate *> *candidates = ({
             NSMutableArray *dates = self.calendar.selectedDates.reverseObjectEnumerator.allObjects.mutableCopy;
@@ -350,7 +355,7 @@
 
 - (void)performAlphaAnimationWithProgress:(CGFloat)progress
 {
-    CGFloat opacity = self.transitionAttributes.targetScope == FSCalendarScopeWeek ? MAX((1-progress*1.1), 0) : progress;
+    CGFloat opacity = self.transitionAttributes.targetScope == FSCalendarScopeWeek ? MAX((1-progress*1.2), 0) : progress;
     NSArray<FSCalendarCell *> *surroundingCells = [self.calendar.visibleCells filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(FSCalendarCell *  _Nullable cell, NSDictionary<NSString *,id> * _Nullable bindings) {
         if (!CGRectContainsPoint(self.collectionView.bounds, cell.center)) {
             return NO;
@@ -360,6 +365,18 @@
         return row != self.transitionAttributes.focusedRow;
     }]];
     [surroundingCells setValue:@(opacity) forKey:@"alpha"];
+    
+    NSArray<FSCalendarCell *> *activeCells = [self.calendar.visibleCells filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id  _Nullable cell, NSDictionary<NSString *,id> * _Nullable bindings) {
+        if ([surroundingCells containsObject:cell]) {
+            return NO;
+        }
+
+        return YES;
+    }]];
+        
+    for (FSCalendarCell *calendarCell in activeCells) {
+        calendarCell.fs_height = self.transitionAttributes.sourceRowHeight + (progress * (self.transitionAttributes.targetRowHeight - self.transitionAttributes.sourceRowHeight));
+    }
 }
 
 - (void)performPathAnimationWithProgress:(CGFloat)progress
@@ -417,6 +434,9 @@
     self.targetPage = tempDate;
     
     self.targetScope = 1 - self.targetScope;
+    CGFloat tempRowHeight = self.sourceRowHeight;
+    self.sourceRowHeight = self.targetRowHeight;
+    self.targetRowHeight = tempRowHeight;
 }
     
 @end
