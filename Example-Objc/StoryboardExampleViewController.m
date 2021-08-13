@@ -100,7 +100,7 @@
     return [self.gregorianCalendar isDateInToday:date] ? @"今天" : nil;
 }
 
-- (NSString *)calendar:(FSCalendar *)calendar subtitleForDate:(NSDate *)date
+- (NSAttributedString *)calendar:(FSCalendar *)calendar attributedSubtitleForDate:(NSDate *)date
 {
     if (!_lunar) {
         return nil;
@@ -156,7 +156,7 @@
 
 - (CGPoint)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleOffsetForDate:(NSDate *)date
 {
-    if ([self calendar:calendar subtitleForDate:date]) {
+    if ([self calendar:calendar attributedSubtitleForDate:date]) {
         return CGPointZero;
     }
     if ([_datesWithEvent containsObject:[self.dateFormatter2 stringFromDate:date]]) {
@@ -167,7 +167,7 @@
 
 - (CGPoint)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance eventOffsetForDate:(NSDate *)date
 {
-    if ([self calendar:calendar subtitleForDate:date]) {
+    if ([self calendar:calendar attributedSubtitleForDate:date]) {
         return CGPointZero;
     }
     if ([_datesWithEvent containsObject:[self.dateFormatter2 stringFromDate:date]]) {
@@ -178,7 +178,7 @@
 
 - (NSArray<UIColor *> *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance eventSelectionColorsForDate:(nonnull NSDate *)date
 {
-    if ([self calendar:calendar subtitleForDate:date]) {
+    if ([self calendar:calendar attributedSubtitleForDate:date]) {
         return @[appearance.eventDefaultColor];
     }
     if ([_datesWithEvent containsObject:[self.dateFormatter2 stringFromDate:date]]) {

@@ -1357,7 +1357,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     FSCalendarInvalidateCellAppearance(preferredTitleSelectionColor,titleSelectionColorForDate);
 
     FSCalendarInvalidateCellAppearanceWithDefault(preferredTitleOffset,titleOffsetForDate,CGPointInfinity);
-    if (cell.subtitle) {
+    if (cell.subtitleAttributed) {
         FSCalendarInvalidateCellAppearance(preferredSubtitleDefaultColor,subtitleDefaultColorForDate);
         FSCalendarInvalidateCellAppearance(preferredSubtitleSelectionColor,subtitleSelectionColorForDate);
         FSCalendarInvalidateCellAppearanceWithDefault(preferredSubtitleOffset,subtitleOffsetForDate,CGPointInfinity);
@@ -1387,7 +1387,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     cell.image = [self.dataSourceProxy calendar:self imageForDate:date];
     cell.numberOfEvents = [self.dataSourceProxy calendar:self numberOfEventsForDate:date];
     cell.titleLabel.text = [self.dataSourceProxy calendar:self titleForDate:date] ?: @([self.gregorian component:NSCalendarUnitDay fromDate:date]).stringValue;
-    cell.subtitle  = [self.dataSourceProxy calendar:self subtitleForDate:date];
+    cell.subtitleAttributed  = [self.dataSourceProxy calendar:self attributedSubtitleForDate:date];
     cell.selected = [_selectedDates containsObject:date];
     cell.dateIsToday = self.today?[self.gregorian isDate:date inSameDayAsDate:self.today]:NO;
     cell.weekend = [self.gregorian isDateInWeekend:date];

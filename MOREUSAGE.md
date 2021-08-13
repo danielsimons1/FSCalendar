@@ -183,7 +183,7 @@ calendar.appearance.borderRadius = 0
 
 ```objective-c
 // FSCalendarDataSource
-- (NSString *)calendar:(FSCalendar *)calendar subtitleForDate:(NSDate *)date
+- (NSAttributedString *)calendar:(FSCalendar *)calendar attributedSubtitleForDate:(NSDate *)date
 {
     return yourSubtitle;
 }

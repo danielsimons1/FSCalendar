@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Asks the dataSource for a subtitle for the specific date under the day text.
  */
-- (nullable NSString *)calendar:(FSCalendar *)calendar subtitleForDate:(NSDate *)date;
+- (nullable NSAttributedString *)calendar:(FSCalendar *)calendar attributedSubtitleForDate:(NSDate *)date;
 
 /**
  * Asks the dataSource for an image for the specific date.

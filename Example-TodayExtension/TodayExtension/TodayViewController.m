@@ -95,7 +95,7 @@
     return appearance.selectionColor;
 }
 
-- (NSString *)calendar:(FSCalendar *)calendar subtitleForDate:(NSDate *)date
+- (NSString *)calendar:(FSCalendar *)calendar attributedSubtitleForDate:(NSDate *)date
 {
     NSInteger day = [_lunarCalendar components:NSCalendarUnitDay fromDate:date].day;
     return _lunarChars[day-1];

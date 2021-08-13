@@ -176,7 +176,7 @@ NS_ASSUME_NONNULL_END
     return self.maximumDate;
 }
 
-- (NSString *)calendar:(FSCalendar *)calendar subtitleForDate:(NSDate *)date
+- (NSAttributedString *)calendar:(FSCalendar *)calendar attributedSubtitleForDate:(NSDate *)date
 {
     if (self.showsEvents) {
         EKEvent *event = [self eventsForDate:date].firstObject;
