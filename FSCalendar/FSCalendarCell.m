@@ -91,8 +91,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (_subtitle) {
-        _subtitleLabel.text = _subtitle;
+    if (_subtitleAttributed) {
+        _subtitleLabel.attributedText = _subtitleAttributed;
         if (_subtitleLabel.hidden) {
             _subtitleLabel.hidden = NO;
         }
@@ -102,7 +102,7 @@
         }
     }
     
-    if (_subtitle) {
+    if (_subtitleAttributed) {
         CGFloat titleHeight = self.titleLabel.font.lineHeight;
         CGFloat subtitleHeight = self.subtitleLabel.font.lineHeight;
         
@@ -199,7 +199,7 @@
     if (![titleFont isEqual:_titleLabel.font]) {
         _titleLabel.font = titleFont;
     }
-    if (_subtitle) {
+    if (_subtitleAttributed) {
         textColor = self.colorForSubtitleLabel;
         if (![textColor isEqual:_subtitleLabel.textColor]) {
             _subtitleLabel.textColor = textColor;
@@ -353,11 +353,11 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
     }
 }
 
-- (void)setSubtitle:(NSString *)subtitle
+- (void)setSubtitleAttributed:(NSAttributedString *)subtitle
 {
-    if (![_subtitle isEqualToString:subtitle]) {
-        BOOL diff = (subtitle.length && !_subtitle.length) || (_subtitle.length && !subtitle.length);
-        _subtitle = subtitle;
+    if (![_subtitleAttributed.string isEqualToString:subtitle.string]) {
+        BOOL diff = (subtitle.length && !_subtitleAttributed.length) || (_subtitleAttributed.length && !subtitle.length);
+        _subtitleAttributed = subtitle;
         if (diff) {
             [self setNeedsLayout];
         }
