@@ -201,9 +201,6 @@
     }
     if (_subtitleAttributed) {
         textColor = self.colorForSubtitleLabel;
-        if (![textColor isEqual:_subtitleLabel.textColor]) {
-            _subtitleLabel.textColor = textColor;
-        }
         titleFont = self.calendar.appearance.subtitleFont;
         if (![titleFont isEqual:_subtitleLabel.font]) {
             _subtitleLabel.font = titleFont;
