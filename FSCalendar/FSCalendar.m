@@ -932,9 +932,9 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         }
     }
     
-    if (newScope == FSCalendarScopeWeek) {
-        return 2 * _preferredRowHeight;
-    }
+//    if (newScope == FSCalendarScopeWeek) {
+//        return 2 * _preferredRowHeight;
+//    }
     
     return _preferredRowHeight;
 }
